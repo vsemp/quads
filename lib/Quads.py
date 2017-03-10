@@ -21,6 +21,7 @@ import argparse
 import os
 import sys
 import logging
+import requests
 from subprocess import call
 from subprocess import check_call
 from Clouds import Clouds
@@ -672,3 +673,7 @@ class Quads(object):
             else:
                 print current_cloud
 
+    # add for EC528 HIL-QUADS integration project
+    def quads_rest_call(self, method, url, request, hil_data=None):
+        r = requests.request(method, url + request, data= hil_data)
+        print r.text
