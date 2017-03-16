@@ -9,7 +9,8 @@ import os
 import sys
 from subprocess import call
 from subprocess import check_call
-
+import requests
+from cli import *
 
 # used to load the configuration for quads behavior
 def quads_load_config(quads_config):
@@ -85,6 +86,8 @@ def main(argv):
     parser.add_argument('--move-hosts', dest='movehosts', action='store_true', default=None, help='Move hosts if schedule has changed')
     parser.add_argument('--move-command', dest='movecommand', type=str, default=defaultmovecommand, help='External command to move a host')
     parser.add_argument('--dry-run', dest='dryrun', action='store_true', default=None, help='Dont update state when used with --move-hosts')
+
+    parser.add_argument('--hil', dest='hil', type=str, default=None, help='Put "yes" to use HIL')
 
     args = parser.parse_args()
 
@@ -172,6 +175,11 @@ def main(argv):
         exit(0)
 
     if args.rmcloud:
+        if args.hil is not None:
+            network_delete(args.rmcloud)
+            project_delete(args.rmcloud)
+            list_projects()
+            list_networks()
         quads.quads_remove_cloud(args.rmcloud)
         exit(0)
 
@@ -184,6 +192,11 @@ def main(argv):
         exit(0)
 
     if args.cloudresource:
+	    if args.hil is not None:
+            project_create(args.cloudresource)
+            network_create_simple(args.cloudresource, args.cloudresource)
+            list_projects()
+            list_networks()
         quads.quads_update_cloud(args.cloudresource, args.description, args.force, args.cloudowner, args.ccusers, args.cloudticket, args.qinq)
         exit(0)
 
