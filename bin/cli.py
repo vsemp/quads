@@ -21,8 +21,8 @@ def check_status_code(response):
 # safe, we should change it to something more generic.
 def object_url(*args):
     # Prefer an environmental variable for getting the endpoint if available.
-    #url = os.environ.get('HAAS_ENDPOINT')
-    url = 'http://127.0.0.1:5000'
+    # url = os.environ.get('HAAS_ENDPOINT')
+    url = 'http://127.0.0.1:5000' # 528
     if url is None:
         url = cfg.get('client', 'endpoint')
     for arg in args:
@@ -40,7 +40,7 @@ def object_url(*args):
 #        `params` - query parameters (for GET)
 
 def do_put(url, data={}):
-    check_status_code(requests.request('PUT', url, data=json.dumps(data)))
+    check_status_code(requests.request('PUT', url, data=json.dumps(data))) # 528
 
 
 def do_post(url, data={}):

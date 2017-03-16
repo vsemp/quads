@@ -10,7 +10,7 @@ import sys
 from subprocess import call
 from subprocess import check_call
 import requests
-from cli import *
+from cli import * # 528
 
 # used to load the configuration for quads behavior
 def quads_load_config(quads_config):
@@ -87,7 +87,7 @@ def main(argv):
     parser.add_argument('--move-command', dest='movecommand', type=str, default=defaultmovecommand, help='External command to move a host')
     parser.add_argument('--dry-run', dest='dryrun', action='store_true', default=None, help='Dont update state when used with --move-hosts')
 
-    parser.add_argument('--hil', dest='hil', type=str, default=None, help='Put "yes" to use HIL')
+    parser.add_argument('--hil', dest='hil', type=str, default=None, help='Put "yes" to use HIL') # 528
 
     args = parser.parse_args()
 
@@ -175,7 +175,7 @@ def main(argv):
         exit(0)
 
     if args.rmcloud:
-        if args.hil is not None:
+        if args.hil is not None: # 528
             network_delete(args.rmcloud)
             project_delete(args.rmcloud)
             list_projects()
@@ -192,7 +192,7 @@ def main(argv):
         exit(0)
 
     if args.cloudresource:
-	    if args.hil is not None:
+	    if args.hil is not None: # 528
             project_create(args.cloudresource)
             network_create_simple(args.cloudresource, args.cloudresource)
             list_projects()
