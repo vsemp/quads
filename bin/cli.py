@@ -49,6 +49,7 @@ def do_post(url, data={}):
 
 def do_get(url, params=None):
     check_status_code(requests.request('GET', url, params=params))
+    return requests.request('GET', url, params=params).json()
 
 
 def do_delete(url):
