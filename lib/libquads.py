@@ -101,15 +101,7 @@ class Quads(object):
         self.inventory_service = get_inventory_service()
         self.network_service = get_network_service()
 
-        if initialize:
-            self.quads_init_data(force)
-        try:
-            stream = open(config, 'r')
-            self.data = yaml.load(stream)
-            stream.close()
-        except Exception, ex:
-            self.logger.error(ex)
-            exit(1)
+        self.inventory_service.load_data(self, force)
 
         self.quads = QuadsData(self.data)
         self._quads_history_init()
