@@ -118,11 +118,11 @@ class QuadsNativeInventoryDriver(InventoryService):
             exit(1)
     
     def write_data(self, quadsinstance, doexit = True):
-        quadsinstance.quads_write_data(doexit)
+        quadsinstance.quads_write_data_(doexit)
 
     def sync_state(self, quadsinstance):
-        quadsinstance.quads_sync_state()
+        quadsinstance.quads_sync_state_()
     
     def init_data(self, quadsinstance, force):
-        quadsinstance.quads_init_data(force)
+        quadsinstance.quads_init_data_(force)
 

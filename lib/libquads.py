@@ -125,6 +125,10 @@ class Quads(object):
 
     # we occasionally need to write the data back out
     def quads_write_data(self, doexit = True):
+        self.inventory_service.write_data(self, doexit)
+
+
+    def quads_write_data_(self, doexit = True):
         try:
             stream = open(self.config, 'w')
             self.data = {"clouds":self.quads.clouds.data, "hosts":self.quads.hosts.data, "history":self.quads.history.data}
@@ -135,10 +139,13 @@ class Quads(object):
             self.logger.error("There was a problem with your file %s" % ex)
             if doexit:
                 exit(1)
+    
 
+    def quads_init_data(self, force):
+        self.inventory_service.init_data(self, force)
     # if passed --init, the config data is wiped.
     # typically we will not want to continue execution if user asks to initialize
-    def quads_init_data(self, force):
+    def quads_init_data_(self, force):
         if not force:
             if os.path.isfile(self.config):
                 self.logger.warn("Warning: " + self.config + " exists. Use --force to initialize.")
@@ -192,9 +199,12 @@ class Quads(object):
 
         else:
             return None, None, None
+    
 
-    # sync the statedir db for hosts with schedule
     def quads_sync_state(self):
+        self.inventory_service.init_data(self)
+    # sync the statedir db for hosts with schedule
+    def quads_sync_state_(self):
         # sync state
         if self.datearg is not None:
             self.logger.error("--sync and --date are mutually exclusive.")
