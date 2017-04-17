@@ -11,10 +11,6 @@ import logging
 from subprocess import call
 from subprocess import check_call
 
-sys.path.append(os.path.dirname(__file__) + "/../")
-#from lib.hardware_services.hardware_service import set_hardware_service
-
-
 logger = logging.getLogger('quads')
 ch = logging.StreamHandler(sys.stdout)
 ch.setLevel(logging.INFO)
@@ -56,14 +52,14 @@ def main(argv):
 
     sys.path.append(quads_config["install_dir"] + "/lib")
     sys.path.append(os.path.dirname(__file__) + "/../lib")
-    sys.path.append(os.path.dirname(__file__) + "/../lib/hardware_services/hardware_drivers/")
+
     import libquads
 
     defaultconfig = quads_config["data_dir"] + "/schedule.yaml"
     defaultstatedir = quads_config["data_dir"] + "/state"
     defaultmovecommand = "/bin/echo"
 
-    # EC528 addition - sets hardware service
+    # EC528: addition - sets hardware service
     defaulthardwareservice = quads_config["hardware_service"]
 
 
