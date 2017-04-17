@@ -114,7 +114,7 @@ class Quads(object):
         self.inventory_service = get_inventory_service()
         self.network_service = get_network_service()
 
-        self.inventory_service.load_data(self, force)
+        self.inventory_service.load_data(self, force, initialize)
 
         self.quads = QuadsData(self.data)
         self._quads_history_init()
@@ -171,7 +171,7 @@ class Quads(object):
 
     # we occasionally need to write the data back out
     def quads_write_data(self, doexit = True):
-        self.inventory_service.load_data(self, doexit)
+        self.inventory_service.write_data(self, doexit)
 
     # if passed --init, the config data is wiped.
     # typically we will not want to continue execution if user asks to initialize

@@ -139,7 +139,7 @@ class MockInventoryDriver(InventoryService):
     def list_hosts(self,quadsinstance):
         quadsinstance.quads.hosts.host_list()
 
-    def load_data(self, quadsinstance, force):
+    def load_data(self, quadsinstance, force, initialize):
         if initialize:
             quadsinstance.quads_init_data(force)
         try:
